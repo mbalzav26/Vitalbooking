@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_144238) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "appointment_date", null: false
     t.text "reason", default: "", null: false
@@ -58,14 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_144238) do
     t.index ["clinic_id"], name: "index_offices_on_clinic_id"
     t.index ["code"], name: "index_offices_on_code", unique: true
     t.index ["name"], name: "index_offices_on_name"
-  end
-
-  create_table "people", force: :cascade do |t|
-    t.string "nombre"
-    t.date "fnacimiento"
-    t.integer "telefono"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "phones", force: :cascade do |t|
