@@ -56,7 +56,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
+  gem 'hirb'
+  gem 'awesome_print'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -74,3 +75,4 @@ end
 gem 'hotwire-rails'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'simple_form', '~> 5.2'
+gem 'geocoder', '~> 1.6'

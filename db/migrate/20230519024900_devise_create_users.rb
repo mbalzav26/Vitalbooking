@@ -12,7 +12,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :dni, null: false, default: ""
       t.string  :type_of_document, null: false, default: ""
 
-      ## Recoverable
+      ## Recoverable  
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
