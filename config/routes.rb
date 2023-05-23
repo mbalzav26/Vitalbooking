@@ -8,8 +8,12 @@ Rails.application.routes.draw do
     post 'signin', to: 'devise/sessions#create', as: :user_session
     match 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
   end
+  resources :clinics do
+    resources :offices
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  mount ActionCable.server => '/cable'
 end

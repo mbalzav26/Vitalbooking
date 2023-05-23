@@ -1,0 +1,17 @@
+<%=  turbo_frame_tag 'new_office', src: new_clinic_office_path(@clinic, @office) %>
+<%= turbo_frame_tag 'office_table' do %>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Codigo</th>
+            <th colspan="3">Opciones</th>
+        </tr>
+        </thead>
+        <tbody id='office_list'>
+            <%= render @offices %>
+        </tbody>
+    </table>
+<%end%>
+<%= turbo_stream_from 'office_list' %>
+

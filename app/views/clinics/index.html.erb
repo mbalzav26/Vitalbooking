@@ -1,0 +1,25 @@
+<%= turbo_frame_tag 'new_clinic', src: new_clinic_path %>
+<%= turbo_frame_tag 'clinic_table' do %>
+<div class="row container-fluid">
+<%# <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#miModal">
+  Nueva Clinica
+</button> %>
+<br/>
+    <div class="col-md-12 mt-3">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col"colspan="3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody id='clinic_list'>
+            <%= render @clinics %>
+        </tbody>
+    </table>
+</div>
+<% end %>
+<%= render 'modal' %>
+<%= turbo_stream_from 'clinic_list' %>
