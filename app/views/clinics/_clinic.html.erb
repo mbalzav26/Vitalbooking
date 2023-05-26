@@ -1,9 +1,14 @@
-<tr>
+<tr id="<%= dom_id(clinic) %>">
     <td><%= clinic.name %></td>
     <td><%= clinic.address %></td>
     <td><%= clinic.city %></td>
     <td><%= link_to 'Show', clinic %></td>
-    <td><%= link_to 'Edit', edit_clinic_path(clinic) %></td>
+    
+    <td>
+    <%= link_to 'Editar', edit_clinic_path(clinic), remote: true, 'data-turbo-frame': 'clinics' %></td>
     <%# <%# eliminar con turbo-rails %>
-    <td><%= link_to 'Destroy', clinic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td> <%= link_to 'Eliminar', delete_by_get_clinic_path(clinic), method: :get, remote: true, 'data-turbo-frame': 'clinics' %>
+        
+        <%# link_to 'Eliminar', clinic, method: :delete, data: { confirm: 'Are you sure?' }, target: "_top" %>
+    </td>
 </tr>

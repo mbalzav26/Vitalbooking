@@ -9,8 +9,13 @@ Rails.application.routes.draw do
     match 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
   end
   resources :clinics do
+    member do
+      get :delete_by_get
+      patch :restaurar, to: 'clinics#restaurar'
+    end
     resources :offices
   end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

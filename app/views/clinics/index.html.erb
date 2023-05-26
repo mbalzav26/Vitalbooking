@@ -1,9 +1,9 @@
-<%= turbo_frame_tag 'new_clinic', src: new_clinic_path %>
-<%= turbo_frame_tag 'clinic_table' do %>
-<div class="row container-fluid">
+<%= turbo_frame_tag 'form_clinic', src: new_clinic_path %>
 <%# <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#miModal">
   Nueva Clinica
 </button> %>
+<%= turbo_frame_tag 'clinic_table' do %>
+<div class="row container-fluid">
 <br/>
     <div class="col-md-12 mt-3">
     <table class="table table-bordered table-hover">

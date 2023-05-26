@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_232527) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "appointment_date", null: false
     t.text "reason", default: "", null: false
@@ -18,7 +18,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.integer "clinic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["clinic_id"], name: "index_appointments_on_clinic_id"
+    t.index ["deleted_at"], name: "index_appointments_on_deleted_at"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
@@ -33,10 +35,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.datetime "updated_at", null: false
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
+    t.datetime "deleted_at"
     t.index ["city"], name: "index_clinics_on_city"
+    t.index ["deleted_at"], name: "index_clinics_on_deleted_at"
     t.index ["name"], name: "index_clinics_on_name"
     t.index ["state"], name: "index_clinics_on_state"
     t.index ["street"], name: "index_clinics_on_street"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -45,7 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["code"], name: "index_doctors_on_code", unique: true
+    t.index ["deleted_at"], name: "index_doctors_on_deleted_at"
     t.index ["last_name", "first_name"], name: "index_doctors_on_last_name_and_first_name"
   end
 
@@ -55,8 +76,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.integer "clinic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["clinic_id"], name: "index_offices_on_clinic_id"
     t.index ["code"], name: "index_offices_on_code", unique: true
+    t.index ["deleted_at"], name: "index_offices_on_deleted_at"
     t.index ["name"], name: "index_offices_on_name"
   end
 
@@ -67,6 +90,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.integer "phoneable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_phones_on_deleted_at"
     t.index ["phoneable_id"], name: "index_phones_on_phoneable_id"
   end
 
@@ -77,6 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.integer "office_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_schedules_on_deleted_at"
     t.index ["doctor_id"], name: "index_schedules_on_doctor_id"
     t.index ["office_id"], name: "index_schedules_on_office_id"
   end
@@ -106,7 +133,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_092430) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["dni"], name: "index_users_on_dni", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name"

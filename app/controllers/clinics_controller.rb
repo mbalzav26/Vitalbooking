@@ -1,6 +1,6 @@
 class ClinicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_clinic, only: %i[show edit update destroy]
+  before_action :set_clinic, only: %i[edit update destroy eliminar]
 
   def index
     @clinics = Clinic.all
@@ -27,16 +27,25 @@ class ClinicsController < ApplicationController
   end
 
   def update
-
-  end
-
-  def destroy
-    if @clinic.destroy
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(@clinic) }
-        format.html { redirect_to clinics_path, notice: "Clinica eliminada" }
+    respond_to do |format|
+      if @clinic.update(clinic_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@clinic, partial: "clinics/clinic", locals: { clinic: @clinic }) }
+        redirect_to clinics_path, notice: 'La clínica ha sido actualizada.'
+      else
+        render :edit
       end
     end
+  end
+
+  def delete_by_get
+    clinic = Clinic.find(params[:id])
+    clinic.destroy
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to clinics_path, notice: 'La clínica ha sido eliminada.' }
+    end
+    # redirect_to clinics_path, notice: 'La clínica ha sido eliminada.'
+    # Turbo::StreamsChannel.broadcast_replace_to('clinics', target: "clinic_#{clinic.id}", template: 'clinics/destroy')
   end
 
   private
@@ -46,7 +55,7 @@ class ClinicsController < ApplicationController
   end
 
   def clinic_params
-    params.require(:clinic).permit(:name, :street, :city, :state)
+    params.require(:clinic).permit(:name, :street, :city, :state, :deleted_at)
   end
 
 end

@@ -17,6 +17,38 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # Email configuration
+    # config.action_mailer.perform_deliveries = true
+    # config.action_mailer.raise_delivery_errors = true
+    # config.active_job.queue_adapter = :deleyed_job
+
+    # config.action_mailer.default_url_options = {host: 'localhost', port: 5000}
+
+    # config.action_mailer.delivery_method = :smtp
+    # config.action_mailer.smtp_settings = {
+    #   address:              'smtp-relay.sendinblue.com',
+    #   port:                 587,
+    #   domain:               'example.com',
+    #   apikey:               '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'
+    #   user_name:            'wilmanjunior2001@gmail.com',
+    #   password:             'QJ0jtGHa9SrLDFc5',
+    #   authentication:       :plain,
+    #   enable_starttls_auto: true }
+    config.action_mailer.perform_caching = true
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default_url_options = {host: 'http://localhost:5000'}
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              'smtp-relay.sendinblue.com',
+      port:                 587,
+      enable_starttls_auto: true,
+      domain:               'http://localhost:5000',
+      user_name:            "wilmanjunior2001@gmail.com",
+      password:             "QJ0jtGHa9SrLDFc5",
+      authentication:       :plain
+  }
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?

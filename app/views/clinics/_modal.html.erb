@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= turbo_frame_tag 'new_clinic',  src: new_clinic_path(@clinic) %>
+        <%= turbo_frame_tag 'form_clinic',  src: new_clinic_path(@clinic) %>
       </div>
       <%# <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

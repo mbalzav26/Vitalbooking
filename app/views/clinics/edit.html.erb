@@ -1,2 +1,8 @@
-<h1>Clinics#edit</h1>
-<p>Find me in app/views/clinics/edit.html.erb</p>
+<%= turbo_frame_tag 'form_clinic' do %>
+<div class="row">
+    <div class="col">
+        <h3 class="text-center">Editar Clinica</h3>
+        <%= render 'form', clinic: @clinic %>
+    </div>
+</div>
+<% end %>
