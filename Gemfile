@@ -85,3 +85,5 @@ gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.6'
 gem 'sendinblue'
 gem 'sib-api-v3-sdk'
 gem 'addressable', '~> 2.8'
+gem "rolify"
+gem 'pundit'
