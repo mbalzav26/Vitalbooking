@@ -1,12 +1,22 @@
-<div class="contenedor">
-    <h1>Bienvenido a Vital Booking</h1>
-    <% if user_signed_in? %>
-        <h3><%= current_user.first_name %>
-        <%= current_user.last_name %></h3><br/>
-        <%# current_user.email %><br/>
-        <%# link_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
-    <% else %>
-        <%= link_to "Sign up", new_user_registration_path %>
-        <%= link_to "Sign in", new_user_session_path %>
-    <% end %>
-</div>
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  var calendarEl = document.getElementById("calendar");
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: "es",
+    timeZone: 'UTC',
+    themeSystem: 'standard',
+    initialView: "dayGridMonth",
+    // height: 650,
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,timeGridDay",
+    },
+  });
+
+  calendar.render();
+});
+</script>

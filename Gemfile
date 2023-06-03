@@ -87,3 +87,8 @@ gem 'sib-api-v3-sdk'
 gem 'addressable', '~> 2.8'
 gem "rolify"
 gem 'pundit'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'activerecord-session_store'

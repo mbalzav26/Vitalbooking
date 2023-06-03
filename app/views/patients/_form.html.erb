@@ -1,0 +1,16 @@
+<%= simple_form_for(@patient) do |f| %>
+    <div class="form-group">
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.input :first_name %>
+        <%= f.input :second_name %>
+        <%= f.input :last_name %>
+        <%= f.input :type_of_document %>
+        <%= f.input :dni %>
+        <%= f.date_select :date_of_birth, start_year: 1900, end_year: Date.today.year %>
+    </div>
+    <div class:"mt-2">
+        <%= f.submit 'Guardar', class:"btn btn-primary" %>
+    </div>
+<% end %>
+
+    

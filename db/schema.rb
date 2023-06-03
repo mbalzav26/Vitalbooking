@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_220544) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_03_122805) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "appointment_date", null: false
     t.text "reason", default: "", null: false
@@ -83,6 +83,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_220544) do
     t.index ["name"], name: "index_offices_on_name"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "first_name", default: "", null: false
+    t.string "second_name"
+    t.string "last_name", default: "", null: false
+    t.string "type_of_document", default: "", null: false
+    t.integer "dni", null: false
+    t.date "date_of_birth", null: false
+    t.string "membership", default: "", null: false
+    t.integer "user_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_patients_on_deleted_at"
+    t.index ["dni"], name: "index_patients_on_dni", unique: true
+    t.index ["first_name", "second_name", "last_name"], name: "index_patients_on_first_name_and_second_name_and_last_name"
+    t.index ["user_id"], name: "index_patients_on_user_id"
+  end
+
   create_table "phones", force: :cascade do |t|
     t.integer "number"
     t.string "state"
@@ -119,14 +137,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_220544) do
     t.index ["office_id"], name: "index_schedules_on_office_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", default: "", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.date "date_of_birth"
-    t.integer "dni", null: false
-    t.string "type_of_document", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -145,11 +167,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_220544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "provider", limit: 50, default: "", null: false
+    t.string "uid", limit: 500, default: "", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
-    t.index ["dni"], name: "index_users_on_dni", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
@@ -165,6 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_220544) do
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "users"
   add_foreign_key "offices", "clinics"
+  add_foreign_key "patients", "users"
   add_foreign_key "schedules", "doctors"
   add_foreign_key "schedules", "offices"
 end

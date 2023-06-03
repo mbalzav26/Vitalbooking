@@ -13,6 +13,10 @@ module Vitalbooking
     # config.active_job.queue_adapter = :delayed_job
     # Configuration for the application, engines, and railties goes here.
     #
+    # config.assets.precompile += ['application-print.css']
+    # config.action_controller.default_protect_from_forgery = true
+      config.action_controller.default_protect_from_forgery = true
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
