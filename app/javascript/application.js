@@ -13,3 +13,15 @@ import "jquery"
 //= require chartkick
 //= require Chart.bundle
 //= require sb-admin-2.min
+import { Application } from "stimulus";
+import FormCleanupController from "./controllers/form_cleanup_controller";
+
+const application = Application.start();
+application.register("form-cleanup", FormCleanupController);
+
+
+document.addEventListener("turbo:before-fetch-response", (event) => {
+    
+
+});
+

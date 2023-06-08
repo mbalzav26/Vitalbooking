@@ -1,0 +1,33 @@
+<%= simple_form_for @schedule do |f| %>
+    <%= f.error_notification %>
+    <div class="form-group">
+        <%= f.label :start_time, 'Inicio' %>
+        <%= f.time_select :start_time, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :end_time, 'Fin' %>
+        <%= f.time_select :end_time, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%# f.label :clinic_id %>
+        <%= f.association :office,
+                          prompt: "selecionar consultorio",
+                          label: "Consultorio",
+                          required: false %>
+    </div>
+    <div class="form-group">
+        <%# f.label :day %>
+        <%= f.association :doctor,
+                           prompt: "selecionar doctor",
+                           label: "Doctor",
+                           required: false %>
+        <%# f.select :day, [['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6], ['Domingo', 0]], {prompt: true}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group">
+        <%# f.label :status %>
+        <%# f.select :status, [['Activo', 1], ['Inactivo', 0]], {prompt: true}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+    </div>
+<% end %>

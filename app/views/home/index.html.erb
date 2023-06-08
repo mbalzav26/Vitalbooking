@@ -1,4 +1,4 @@
-<div id="calendar"></div>
+<%# <div id="calendar"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -19,4 +19,19 @@
 
   calendar.render();
 });
+</script> %>
+<div id="calendario"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendario');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      timeZone: 'UTC',
+      events: '/appointments.json',
+    });
+    calendar.render();
+  });
 </script>
+

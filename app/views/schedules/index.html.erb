@@ -1,0 +1,18 @@
+<h1>Horarios</h1>
+<hr>
+<%= link_to 'Agregar Horario', new_schedule_path, class: 'btn btn-primary' %>
+
+<table class="table table-bordered table-hover mt-4">
+    <thead>
+        <tr>
+            <th>Hora de inicio</th>
+            <th>Hora de Finalización</th>
+            <th>Doctor</th>
+            <th>Consultorio</th>
+            <th colspan="3" >Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render @schedules %>
+    </tbody>
+</table>

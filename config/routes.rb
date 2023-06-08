@@ -10,18 +10,21 @@ Rails.application.routes.draw do
     match 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
     resources :patients
   end
+
+  resources :appointments
   resources :clinics do
     member do
+      put :restore
       get :delete_by_get
-      patch :restaurar, to: 'clinics#restaurar'
     end
-    resources :offices
+    
+    resources :offices, except: [:show] do
+      get :delete_by_get
+    end
+  end
+  resources :schedules do
+    get 'deleted', to: 'schedules#deleted'
   end
 
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
   mount ActionCable.server => '/cable'
 end

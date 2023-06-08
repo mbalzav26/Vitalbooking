@@ -1,0 +1,15 @@
+<%= simple_form_for @appointment do |f| %>
+    <%= f.error_notification %>
+    <% f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :title, label: "Titulo" %>
+    <%= f.input :appointment_date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
+    <%= f.label :start, "Fecha de inicio" %>
+    <%= f.time_select :start, ampm: true %>
+    <%= f.label :end, "Fecha de finalizacion" %>
+    <%= f.time_select :end, ampm: true %>
+    <%= f.input :status, collection: ['pending', 'completed'] %>
+    <%= f.association :clinic, prompt: "selecionar consultorio", label: "Clinica", required: false %>
+    <%# <%= f.input :doctor_id, collection: Doctor.all.map { |doctor| [doctor.full_name, doctor.id] } %>
+    <%= f.text_area :reason, rows: 3 %>
+    <%= f.button :submit, "Actualizar cita", class: "btn btn-primary", target: "_top" %>
+<% end %>

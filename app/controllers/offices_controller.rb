@@ -1,7 +1,7 @@
 class OfficesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_clinic
-  before_action :set_office, only: %i[show edit update destroy]
+  before_action :set_office, only: %i[edit update destroy]
+    before_action :set_clinic
   
   def index
     @offices = @clinic.offices.all
@@ -15,7 +15,7 @@ class OfficesController < ApplicationController
     @office = @clinic.offices.build(office_params)
     respond_to do |format|
       if @office.save
-        format.turbo_stream
+        # format.turbo_stream
         format.html { redirect_to [@clinic, @office], notice: 'Office was successfully created.' }
       end
     end
@@ -24,11 +24,21 @@ class OfficesController < ApplicationController
   def edit
   end
 
-  def destroy
-    if @office.destroy
-      redirect_to clinic_offices_path(@clinic), notice: 'Office was successfully destroyed.'
+  def update
+    if @office.update(office_params)
+      redirect_to [@clinic, @office], notice: 'Office was successfully updated.'
     else
-      redirect_to clinic_offices_path(@clinic), notice: 'Office was not destroyed.'
+      render :edit
+    end
+  end
+
+  # metodo para eliminar una oficina 
+  def delete_by_get
+    office = Office.find(params[:id])
+    office.destroy
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to clinic_offices_path(@clinic), notice: 'La oficina ha sido eliminada.' }
     end
   end
 

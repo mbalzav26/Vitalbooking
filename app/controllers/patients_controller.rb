@@ -7,7 +7,7 @@ class PatientsController < ApplicationController
     end
 
     def new
-        @patient = Patient.new
+        @patient = Patient.phones.build
     end
 
     def create
@@ -40,6 +40,6 @@ class PatientsController < ApplicationController
     end
 
     def patient_params
-        params.require(:patient).permit(:first_name, :second_name, :last_name, :dni, :type_of_document, :date_of_birth, :membership, :user_id)
+        params.require(:patient).permit(:first_name, :second_name, :last_name, :dni, :type_of_document, :date_of_birth, :membership, :user_id, phones_attributes:[:id, :number, :state])
     end
 end

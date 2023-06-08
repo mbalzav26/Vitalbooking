@@ -35,12 +35,7 @@
     <li class="nav-item dropdown no-arrow">
       <!-- Dropdown - User Information -->
       <div class="profile-menu">
-      <span class="profile-button">
-      <% if @name == '' %>
-      <%= current_user.email %>  &#9662;
-      <% else %>
-        <%= current_user.patient.first_name %> <%= current_user.patient.last_name %> &#9662;</span>
-      <% end %></span>
+      <span class="profile-button"><%= current_user.email %>  &#9662;</span>
       <ul class="profile-dropdown">
         <li class="nav-link">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -25,8 +25,8 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <%= javascript_tag 'sb-admin-2.min', 'data-turbo-track': 'reload' %>
-    <%= stylesheet_link_tag 'sb-admin-2.min', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_tag 'sb-admin-2.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%# stylesheet_link_tag 'sb-admin-2.min', media: 'all', 'data-turbo-track': 'reload' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
   </head>
@@ -38,6 +38,8 @@
           <div id="content">
             <%= render "partials/topbar" %>
               <div class="container-fluid contenedor">
+                <%= I18n.l(Date.today, format: '%A, %d de %B de %Y') %>
+                <%= Time.now.strftime("%H:%M %P") %>
                 <%= yield %>
                 <a class="scroll-to-top rounded" href="#page-top">
                   <i class="fas fa-angle-up"></i>
@@ -50,6 +52,7 @@
         <%= yield %>
     <% end %>
  <!-- Opcional: Plugin para utilizar Moment.js con zonas horarias -->
+    <script src="../javascript/sb-admin-2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js"></script>
@@ -61,61 +64,62 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-      (function($) {
-      "use strict"; // Start of use strict
-      // Toggle the side navigation
-      $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
-        $("body").toggleClass("sidebar-toggled");
-        $(".sidebar").toggleClass("toggled");
-        if ($(".sidebar").hasClass("toggled")) {
-          $('.sidebar .collapse').collapse('hide');
-        };
-      });
+(function($) {
+  "use strict"; // Start of use strict
 
-      // Close any open menu accordions when window is resized below 768px
-      $(window).resize(function() {
-        if ($(window).width() < 768) {
-          $('.sidebar .collapse').collapse('hide');
-        };
-        
-        // Toggle the side navigation when window is resized below 480px
-        if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
-          $("body").addClass("sidebar-toggled");
-          $(".sidebar").addClass("toggled");
-          $('.sidebar .collapse').collapse('hide');
-        };
-      });
+  // Toggle the side navigation
+  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+    $("body").toggleClass("sidebar-toggled");
+    $(".sidebar").toggleClass("toggled");
+    if ($(".sidebar").hasClass("toggled")) {
+      $('.sidebar .collapse').collapse('hide');
+    };
+  });
 
-      // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
-      $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
-        if ($(window).width() > 768) {
-          var e0 = e.originalEvent,
-            delta = e0.wheelDelta || -e0.detail;
-          this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-          e.preventDefault();
-        }
-      });
+  // Close any open menu accordions when window is resized below 768px
+  $(window).resize(function() {
+    if ($(window).width() < 768) {
+      $('.sidebar .collapse').collapse('hide');
+    };
+    
+    // Toggle the side navigation when window is resized below 480px
+    if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
+      $("body").addClass("sidebar-toggled");
+      $(".sidebar").addClass("toggled");
+      $('.sidebar .collapse').collapse('hide');
+    };
+  });
 
-      // Scroll to top button appear
-      $(document).on('scroll', function() {
-        var scrollDistance = $(this).scrollTop();
-        if (scrollDistance > 100) {
-          $('.scroll-to-top').fadeIn();
-        } else {
-          $('.scroll-to-top').fadeOut();
-        }
-      });
+  // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+  $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+    if ($(window).width() > 768) {
+      var e0 = e.originalEvent,
+        delta = e0.wheelDelta || -e0.detail;
+      this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+      e.preventDefault();
+    }
+  });
 
-      // Smooth scrolling using jQuery easing
-      $(document).on('click', 'a.scroll-to-top', function(e) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-          scrollTop: ($($anchor.attr('href')).offset().top)
-        }, 1000, 'easeInOutExpo');
-        e.preventDefault();
-      });
+  // Scroll to top button appear
+  $(document).on('scroll', function() {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
 
-    })(jQuery); // End of use strict
+  // Smooth scrolling using jQuery easing
+  $(document).on('click', 'a.scroll-to-top', function(e) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: ($($anchor.attr('href')).offset().top)
+    }, 1000, 'easeInOutExpo');
+    e.preventDefault();
+  });
+
+})(jQuery);
 
     </script>
   </body>

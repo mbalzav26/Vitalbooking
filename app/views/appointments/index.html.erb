@@ -1,0 +1,37 @@
+<%# turbo_frame_tag 'calendar' do %>
+<div id="calendar"></div>
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+  var calendarEl = document.getElementById("calendar");
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    hoverCursor: "pointer",
+    selectable: true,
+    hoverColor: "red",
+    locale: "es",
+    timeZone: 'UTC',
+    themeSystem: 'standard',
+    initialView: "dayGridMonth",
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,timeGridDay",
+    },
+    events: [
+      <% @appointments.each do |appointment| %>
+        {
+          title: "<%= appointment.title %>",
+          start: "<%= appointment.start.strftime('%Y-%m-%dT%H:%M:%S') %>",
+          end: "<%= appointment.end.strftime('%Y-%m-%dT%H:%M:%S') %>",
+          url: "<%= edit_appointment_url(appointment) %>",
+          color: "<%= appointment.status == 'pending' ? 'red' : 'green' %>",
+        },
+      <% end %>
+    ], 
+  });
+
+  calendar.render();
+});
+</script>
+<%# end %>
+<%# turbo_frame_tag 'calendar', src: appointments_path, target: '_top' %>

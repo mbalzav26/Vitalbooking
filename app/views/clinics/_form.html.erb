@@ -1,4 +1,4 @@
-<%= simple_form_for @clinic do |f| %>
+<%= simple_form_for @clinic, data: { controller: "form-cleanup", action: "submit->end-cleanup#resetForm", target: "form-cleanup.form" } do |f| %>
     <div class="form-inputs">
         <%= f.input :name, required: true, autofocus: true %>
         <%= f.input :street, required: true %>

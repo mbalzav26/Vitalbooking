@@ -1,9 +1,10 @@
-<tr>
+<tr id="<%= dom_id(office) %>">
     <td><%= office.name %></td>
     <td><%= office.code %></td>
     <td>
-        
-        <%# link_to 'Edit', edit_clinic_office_path(@clinic, office) %>
-        <%# link_to 'Destroy', clinic_office_path(@clinic, office), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_clinic_office_path(@clinic, office), remote: true, target: '_top', 'data-turbo-frame': 'offices' %>
+        <%= link_to 'Destroy', clinic_office_path(@clinic, office), method: :get, remote: true, 'data-turbo-frame': 'offices' %>
+    <td> <%= link_to 'Eliminar', clinic_office_delete_by_get_path(@clinic, office), method: :get, remote: true, 'data-turbo-frame': 'offices' %></td>
+
     </td>
 </tr>

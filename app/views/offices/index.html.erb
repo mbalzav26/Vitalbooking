@@ -1,6 +1,9 @@
-<%=  turbo_frame_tag 'new_office', src: new_clinic_office_path(@clinic, @office) %>
+<h1> Consultorios de la <%= @clinic.name %> </h1>
+<hr>
+<%= link_to 'Registrar Consultorio', new_clinic_office_path, class: 'btn btn-primary', data: { turbo_frame: 'new_office' } %>
+
 <%= turbo_frame_tag 'office_table' do %>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover mt-4">
         <thead>
         <tr>
             <th scope="col">Nombre</th>
